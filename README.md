@@ -4,4 +4,5 @@ The Roblox game engine is a way to run a Roblox virtual machine, inside of Roblo
 
 ## Installation
 1. Download the build.rbxlx, and open it in roblox studio.
-(more steps coming soon.
+2. 
+(more steps coming soon.)
