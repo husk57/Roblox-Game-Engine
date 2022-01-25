@@ -6,52 +6,6 @@ local objLoader = require(script.Parent.OBJLoader)
 local textureLoader = require(script.Parent.TextureLoader)
 local dimensions = script.Parent.Dimensions.Value
 
-local function bresenham(x1, y1, x2, y2,backbuffer)
-	local delta_x = x2 - x1
-	local err
-	local ix = delta_x > 0 and 1 or -1
-	delta_x = 2 * math.abs(delta_x)
-
-	local delta_y = y2 - y1
-	local iy = delta_y > 0 and 1 or -1
-	delta_y = 2 * math.abs(delta_y)
-	if x1 < dimensions.X and x1 > 0 and y1 < dimensions.Y and y1 > 0 then
-		backbuffer[dimensions.Y*(y1-1)+(dimensions.X - x1 +1)] = Vector3.new(0.5,1,0)
-	end
-
-	if delta_x >= delta_y then
-		err = delta_y - delta_x / 2
-
-		while x1 ~= x2 do
-			if (err > 0) or ((err == 0) and (ix > 0)) then
-				err = err - delta_x
-				y1 = y1 + iy
-			end
-
-			err = err + delta_y
-			x1 = x1 + ix
-			if x1 < dimensions.X and x1 > 0 and y1 < dimensions.Y and y1 > 0 then
-				backbuffer[dimensions.Y*(y1-1)+(dimensions.X - x1 +1)] = Vector3.new(0.5,1,0)
-			end
-		end
-	else
-		err = delta_x - delta_y / 2
-
-		while y1 ~= y2 do
-			if (err > 0) or ((err == 0) and (iy > 0)) then
-				err = err - delta_y
-				x1 = x1 + ix
-			end
-
-			err = err + delta_x
-			y1 = y1 + iy
-			if x1 < dimensions.X and x1 > 0 and y1 < dimensions.Y and y1 > 0 then
-				backbuffer[dimensions.Y*(y1-1)+(dimensions.X - x1 +1)] = Vector3.new(0.5,1,0)
-			end
-		end
-	end
-end
-
 --[[dependencies
 {zbuffer, backbuffer, triangleCount, light source (world space), curCamPos (world space)}
 ]]--
